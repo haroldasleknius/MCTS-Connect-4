@@ -1,4 +1,4 @@
-# Link to Video Which Runs the Code: **https://www.youtube.com/watch?v=-QnvotHq6zk**
+# Link to Video Which Runs the Code: **https://www.youtube.com/watch?v=u8TdbUeVKt8**
 # Final Year Project - Game Playing Connect 4 With **Monte Carlo Tree Search**
 This project explores the intersection of artificial intelligence and game theory by implementing a smart agent to play the classic game of Connect 4. The agent leverages Monte Carlo Tree Search (MCTS), a cutting-edge algorithm widely used in AI for decision-making in strategic games, to evaluate potential moves and determine the most optimal path to victory.
 
