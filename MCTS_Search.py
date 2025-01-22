@@ -43,7 +43,10 @@ class MCTS_Search:
     #It expands the tree by adding a child node
     #Returns the newly expanded node
     def expansion(self,node):
-        new_node = node.add_child()
+        column = None
+        if node.game_state.get_total_pieces() > 5:
+            column = node.game_state.one_away_from_win_or_loss(node.current_player)
+        new_node = node.add_child(column)
         return new_node
     
     #Taking in the newly expanded node

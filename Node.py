@@ -62,33 +62,27 @@ class Node:
         copy.place_piece(row, column, self.current_player)
         return copy
 
-    def next_state_critical(self,column,player):
-        copy = deepcopy(self.game_state)
-        row = copy.next_available_row(column)
-        copy.place_piece(row, column, player)
-        return copy
-
-
     #Adds a child node to the current node, depending if its a critical move
     #i.e 1 move away from win/loss
     #if not it prioritises creating a child node on the centre of the board
     #returning the newly created child_node
-    def add_child(self):
-        center_column = self.game_state.board_column // 2
-        possible_moves = sorted(self.game_state.get_valid_moves(), key=lambda x: abs(x - center_column))
-        for move in possible_moves:
-            copy = self.next_state_critical(move, 3 - self.current_player)
-            if copy.four_connected(3 - self.current_player):
-                new_node = Node(copy, self, move, self.mcts_player, 3 - self.current_player)
-                self.childNodes[move] = new_node
-                return new_node
-            
-        for move in possible_moves:
-            if move not in self.childNodes:
-                copy = self.next_state(move)
-                new_node = Node(copy, self, move, self.mcts_player, 3 - self.current_player)
-                self.childNodes[move] = new_node
-                return new_node
+    def add_child(self,critical_move):
+        if critical_move != None:
+            copy = self.next_state(critical_move)
+            next_player = 3 - self.current_player
+            new_node = Node(copy, self, critical_move, self.mcts_player, next_player)
+            self.childNodes[critical_move] = new_node
+            return new_node
+        else:
+            center_column = self.game_state.board_column // 2
+            possible_moves = sorted(self.game_state.get_valid_moves(), key=lambda x: abs(x - center_column))
+            for move in possible_moves:
+                if move not in self.childNodes:
+                    copy = self.next_state(move)
+                    next_player = 3 - self.current_player
+                    new_node = Node(copy, self, move, self.mcts_player, next_player)
+                    self.childNodes[move] = new_node
+                    return new_node
 
     #Checks if there are any childnodes to expand
     #depending on that factor it returns True or False

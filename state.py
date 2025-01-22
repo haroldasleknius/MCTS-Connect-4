@@ -47,7 +47,7 @@ class State():
                 pygame.time.wait(200)
                 self.play_screen()
             elif self.state == "Singleplayer":
-                self.game.game_loop_singleplayer(5000)
+                self.game.game_loop_singleplayer(1000)
             elif self.state == "Multiplayer":
                 pygame.time.wait(200)
                 self.game.game_loop_multiplayer()
